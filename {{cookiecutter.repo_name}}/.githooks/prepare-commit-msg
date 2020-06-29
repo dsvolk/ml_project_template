@@ -3,11 +3,19 @@
 INPUT_FILE=$1
 START_LINE=`head -n1 $INPUT_FILE`
 
-echo "Start validation..."
-
 if [ "$START_LINE" =  "#Validate" ]; then
     if [ -e .commit ]; then
-        python3 validator/prepare-commit-msg.py
+        echo "Start lint test..."
+        pylint -rn --rcfile pylintrc src/*.py validator/*.py
+        retVal=$?
+
+        if [ $retVal -ne 0 ]; then
+            echo "pylint test failed failed."
+            exit 1
+        fi
+
+        echo "Start validation..."
+        python3 validator/run.py
         retVal=$?
         if [ $retVal -ne 0 ]; then
             echo "Validation failed."

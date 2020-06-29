@@ -3,7 +3,9 @@
 if [ -e .commit ]
     then
     rm .commit
-    git add validator_results.json
-    git commit --amend -C HEAD --no-verify
+    if [ -e validator_results.json ]; then
+        git add validator_results.json
+        git commit --amend -C HEAD --no-verify
+    fi
 fi
 exit
