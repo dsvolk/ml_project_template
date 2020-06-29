@@ -23,7 +23,7 @@ $ conda install cookiecutter
 
 ### To start a new project, run:
 ```
-cookiecutter https://github.com/analysiscenter/ml_project_template
+cookiecutter https://github.com/gazprom-neft/ml_project_template
 ```
 
 You will be asked for these fields:
