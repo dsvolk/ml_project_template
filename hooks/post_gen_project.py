@@ -11,7 +11,7 @@ libpaths = {
 'SeismicPro': 'https://github.com/gazprom-neft/SeismicPro.git',
 'seismiqb': 'https://github.com/gazprom-neft/seismiqb.git',
 'petroflow': 'https://github.com/gazprom-neft/petroflow.git',
-'batchflow': 'https://github.com/analysiscenter/batchflow.git'
+'batchflow': 'https://github.com/analysiscenter/batchflow.git',
 # 'testlib': 'https://github.com/analysiscenter/segy.git',
 }
 
@@ -22,22 +22,24 @@ subprocess.run(['git', 'init'])
 git_config_user_name = '{{ cookiecutter.git_config_user_name }}'
 git_config_user_email = '{{ cookiecutter.git_config_user_email }}'
 
-if git_config_user_name is not "do_not_set":
+if git_config_user_name != "do_not_set":
     subprocess.run(['git', 'config', 'user.name', git_config_user_name])
 
-if git_config_user_email is not "do_not_set":
+if git_config_user_email != "do_not_set":
     subprocess.run(['git', 'config', 'user.email', git_config_user_email])
 
-if library is not "no":
+if library != "no":
 
     print("adding submodule", library, "...")
 
     path = libpaths[library]
-    subprocess.run(['git', 'submodule', 'add', path])
-    subprocess.run(['git', 'submodule', 'update', '--init', '--recursive'])
+    subprocess.run(['git', 'submodule', 'add', path], cwd='src')
+    subprocess.run(['git', 'submodule', 'update', '--init', '--recursive'],
+                   cwd='src')
 
     print("copying requirements...")
-    shutil.copyfile(os.path.join(library, 'requirements.txt'), 'requirements.txt')
+    shutil.copyfile(os.path.join('src', library, 'requirements.txt'),
+                    'requirements.txt')
 
 
 print("adding files to git ...")
