@@ -17,7 +17,7 @@ or
 $ conda config --add channels conda-forge
 $ conda install cookiecutter
 ```
- 
+
  - dvc >= 0.93 (optional, only if you want to control your data using DVC)
 
 
@@ -52,7 +52,6 @@ The directory structure of your new project looks like this:
 
 ```
 .
-├── Library submodule         <- SeismicPro, SeismiQB or PetroFlow as a git submodule
 ├── datasets                  <- Keep your datasets here
 ├── docker_containers
 ├── .dockerignore
@@ -72,6 +71,8 @@ The directory structure of your new project looks like this:
 ├── readme.md                 <- The top-level README for developers using this project.
 ├── requirements.txt
 ├── src                       <- Project-specific models and utilities
+│   ├── __init__.py
+│   └── Library submodule         <- batchflow, SeismicPro, SeismiQB or PetroFlow as a git submodule
 └── tests
 
 ```
